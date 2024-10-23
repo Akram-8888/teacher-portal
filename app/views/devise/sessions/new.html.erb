@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Basic CSS for forms */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #5cb85c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #4cae4c;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      width: 48%;
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .tabs button:hover {
+      background: #0056b3;
+    }
+    .hidden {
+      display: none;
+    }
+    .forgot-password {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 10px; /* Adjust this value to position the icon */
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none; /* Prevents clicking on the icon */
+      color: #aaa; /* Icon color */
+    }
+
+    .email-input {
+      padding-left: 30px; /* Add padding to avoid text overlap with the icon */
+    }
+
+    .password-input {
+      padding-left: 30px; /* Add padding to avoid text overlap with the icon */
+    }
+    .btn-btn{
+      display: flex;
+      gap: 20px;
+    }
+  </style>
+  <script>
+    function showForm(formId) {
+      document.getElementById('login-form').classList.add('hidden');
+      document.getElementById('signup-form').classList.add('hidden');
+      document.getElementById(formId).classList.remove('hidden');
+    }
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Teacher Portal</h2>
+  <div class="tabs">
+  </div>
+
+  <div id="login-form">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="form-group" style="width:258px;">
+        <div class="input-group">
+          <%= f.email_field :email, autofocus: true, required: true, class: "form-control email-input" %>
+          <span class="input-icon"><i class="fas fa-user"></i></span>
+        </div>
+      </div>
+      <div class="form-group" style="width:258px;">
+        <div class="input-group">
+          <span class="input-icon"><i class="fas fa-lock"></i></span>
+          <%= f.password_field :password, required: true, class: "form-control password-input" %>
+        </div>
+      </div>
+      <div class="btn-btn">
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+    <button onclick="showForm('signup-form')" style="background-color: blue;">Sign Up</button>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="forgot-password">
+      <%= link_to "Forgot Password?", new_teacher_password_path %>
+    </div>
+  </div>
+
+  <div id="signup-form" class="hidden">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="form-group" style="width:258px;">
+        <div class="input-group">
+          <%= f.email_field :email, autofocus: true, required: true, class: "form-control email-input" %>
+          <span class="input-icon"><i class="fas fa-user"></i></span>
+        </div>
+      </div>
+      <div class="form-group" style="width:258px;">
+        <div class="input-group">
+          <span class="input-icon"><i class="fas fa-lock"></i></span>
+          <%= f.password_field :password, required: true, class: "form-control password-input" %>
+        </div>
+      </div>
+      <div class="form-group" style="width:258px;">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, required: true %>
+      </div>
+      <%= f.submit "Sign Up", class: "btn btn-primary" %>
+    <% end %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+  </div>
+</div>
+
+</body>
+</html>

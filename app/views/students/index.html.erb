@@ -1,0 +1,32 @@
+<h1>Students</h1>
+
+<%= form_with model: Student.new, url: students_path, method: :post, local: true do |form| %>
+  <%= form.text_field :name, placeholder: "Student Name" %>
+  <%= form.text_field :subject, placeholder: "Subject" %>
+  <%= form.number_field :marks, placeholder: "Marks" %>
+  <%= form.submit "Add Student" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Subject</th>
+      <th>Marks</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.subject %></td>
+        <td><%= student.marks %></td>
+        <td>
+          <%= link_to 'Edit', edit_student_path(student) %>
+          <%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

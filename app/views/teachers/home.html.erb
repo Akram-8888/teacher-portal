@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Portal - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Basic CSS for home page */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    td {
+      padding: 3px 10px;
+      text-align: left;
+    }
+    th {
+      padding: 10px;
+      color: #000000;
+      background-color: #e9e9e9;
+    }
+    .button-container {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    .student-icon {
+      display: inline-block;
+      background-color: #007bff; /* Example background color */
+      color: white;
+      font-weight: bold;
+      border-radius: 50%; /* Makes the icon circular */
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px; /* Vertically center the text */
+      margin-right: 10px; /* Adds space between the icon and name */
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+/* Circular button style */
+.action-button {
+  background-color: black; /* Black background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 50%; /* Make it circular */
+  width: 34px; /* Set width */
+  cursor: pointer; /* Pointer cursor */
+  display: flex; /* Flex to center align */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+.action-button:hover {
+  background: #000000;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none; /* Hidden by default */
+  position: absolute; /* Position it below the button */
+  background-color: white; /* White background */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  z-index: 1; /* Stay on top */
+  border-radius: 8px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a,
+.dropdown-content button {
+  color: black; /* Black text */
+  padding: 12px 16px; /* Padding */
+  text-decoration: none; /* No underline */
+  display: block; /* Block level for full width */
+}
+
+/* Show the dropdown content when active */
+.show {
+  display: block; /* Show when .show class is added */
+}
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin: 20px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table thead tr {
+  background-color: #009879;
+  color: white;
+  text-align: left;
+}
+
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+.search-box {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px 5px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.search-btn {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px; /* Could be more or less, depending on screen size */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Button Styles */
+button {
+  padding: 10px 15px;
+  margin: 10px 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+.top-model{
+  justify-content: space-between;
+  display: flex;
+
+}
+.top-model-btn{
+  align-items: right;
+  display: flex;
+}
+.delete-btn {
+  margin: 10px 5px;
+  background: none;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0px !important;
+  font-size: 14px;
+  margin: 10px 50px 8px 15px;
+}
+
+.delete-btn:hover {
+  background: none;
+}
+
+.edit-btn {
+  padding: 0 !important;
+  text-align: left;
+  margin: 10px 50px 0 15px;
+  font-size: 14px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pagination .page {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #007BFF; /* Blue background */
+  color: white; /* Text color */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+}
+
+.pagination .page:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.pagination .page.current {
+  background-color: #0056b3; /* Highlight current page */
+}
+
+.pagination .page.disabled {
+  background-color: #cccccc; /* Gray for disabled links */
+  cursor: not-allowed; /* Show as not clickable */
+}
+
+</style>
+</head>
+<body>
+
+  <h1>Welcome to the Teacher Portal</h1>
+<div class="top-model">
+  <%= form_with url: root_path, method: :get, local: true do %>
+    <div class="search-box">
+      <%= text_field_tag :search, params[:search], placeholder: "Search by name, subject, or marks", class: "search-input" %>
+      <%= submit_tag 'Search', class: "search-btn" %>
+    </div>
+  <% end %>
+  <div class="top-model-btn">
+    <button id="add-student-btn" class="">Add New Student</button>
+    <%= button_to 'Logout', destroy_teacher_session_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to log out?' } %>
+  </div>
+</div>
+
+<% if @students.present? %>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="student-list">
+      <% @students.each do |student| %>
+      <tr>
+        <td width="30%">
+          <div class="student-icon">
+            <%= student.name[0].upcase %>
+          </div>
+          <%= student.name.titleize %>
+        </td>
+        <td width="40%"><%= student.subject.titleize %></td>
+        <td width="20%"><%= student.marks %></td>
+        <td width="10%">
+          <div class="dropdown">
+            <button class="action-button" data-dropdown-id="dropdown-<%= student.id %>" onclick="toggleDropdown(event)">
+              ▼
+            </button>
+            <div class="dropdown-content">
+              <%= link_to 'Edit', edit_student_path(student), class: 'edit-btn' %>
+              <%= button_to 'Delete', student_path(student), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-btn' %>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+  </table>
+<% else %>
+  <% if params[:search].present? %>
+    <!-- Case when the user is searching, but no students match the criteria -->
+    <p>No record found for your search criteria.</p>
+  <% else %>
+    <!-- Case when the user hasn't searched but doesn't have any students (e.g., new account) -->
+    <p>You don't have any students yet. Please add your first student.</p>
+  <% end %>
+<% end %>
+
+<div class="pagination">
+  <%= paginate @students %>
+</div>
+<!-- Add Student Modal -->
+<!-- Modal Structure -->
+<div id="student-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" id="close-modal-btn">&times;</span>
+    <div>
+      <h2>Add New Student</h2>
+      <div id="modal-inputs"></div>
+      <button id="save-student-btn">Save</button>
+      <button id="close-modal-btn">Close</button>
+    </div>
+  </div>
+</body>
+</html>
+
+  <script>
+    const modal = document.getElementById('student-modal');
+const addStudentBtn = document.getElementById('add-student-btn'); // Updated button
+const closeModalBtn = document.getElementById('close-modal-btn');
+const modalInputsContainer = document.getElementById('modal-inputs');
+
+// Function to create input fields with icons
+function createInputField(id, iconClass, placeholder) {
+  const inputGroup = document.createElement('div');
+  inputGroup.classList.add('input-group');
+
+  const inputIconDiv = document.createElement('div');
+  inputIconDiv.classList.add('input-icon');
+
+  const iconElement = document.createElement('i');
+  iconElement.classList.add('fas', iconClass);
+
+  const inputElement = document.createElement('input');
+  inputElement.setAttribute('type', id === 'student-marks' ? 'number' : 'text');
+  inputElement.setAttribute('id', id);
+  inputElement.setAttribute('placeholder', placeholder);
+
+  inputIconDiv.appendChild(iconElement);
+  inputIconDiv.appendChild(inputElement);
+  inputGroup.appendChild(inputIconDiv);
+  modalInputsContainer.appendChild(inputGroup);
+}
+
+// Open the modal
+addStudentBtn.onclick = function() {
+  modal.style.display = 'block';
+  modalInputsContainer.innerHTML = ''; // Clear previous inputs
+  createInputField('student-name', 'fa-user', 'Enter student name');
+  createInputField('student-subject', 'fa-book', 'Enter subject');
+  createInputField('student-marks', 'fa-pencil-alt', 'Enter marks');
+}
+
+// Close the modal when the 'X' button is clicked
+closeModalBtn.onclick = function() {
+  modal.style.display = 'none';
+}
+
+// Close the modal when clicking outside of it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Handle Save button click
+document.getElementById('save-student-btn').onclick = function() {
+  const name = document.getElementById('student-name').value;
+  const subject = document.getElementById('student-subject').value;
+  const marks = document.getElementById('student-marks').value;
+
+  if (name && subject && marks) {
+    fetch('/students', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({
+        student: {
+          name: name,
+          subject: subject,
+          marks: marks
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.errors) {
+        alert("Error: " + data.errors.join(", "));
+      } else {
+        alert(data.message);
+        // Redirect to the root path after success
+        window.location.href = '<%= root_path %>'; // Redirect to the root path
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  } else {
+    alert("Please fill in all fields.");
+  }
+}
+document.addEventListener("DOMContentLoaded", function() {
+  // Listen for AJAX success and error events
+  document.addEventListener("ajax:success", function(event) {
+    const detail = event.detail;
+    const studentId = detail[0].id; // Assuming your controller returns the student object
+    // Remove the student element from the DOM
+    document.getElementById(`student-${studentId}`).remove();
+    alert("Student deleted successfully");
+  });
+
+  document.addEventListener("ajax:error", function(event) {
+    alert("Error deleting student.");
+  });
+
+  // Attach click event listener to delete buttons
+  const deleteButtons = document.querySelectorAll('.delete-btn');
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+      // Show confirmation dialog
+      if (confirm("Are you sure you want to delete this student?")) {
+        // If confirmed, submit the form
+        button.form.submit();
+      }
+    });
+  });
+});
+const dropdownButtons = document.querySelectorAll('.action-button');
+dropdownButtons.forEach(button => {
+  button.addEventListener('click', function(event) {
+      // Get the associated dropdown content
+    const dropdownContent = this.nextElementSibling; 
+      // Toggle visibility of the dropdown
+    dropdownContent.classList.toggle('show');
+      event.stopPropagation(); // Prevent the click from bubbling up to the window
+    });
+});
+
+  // Close dropdowns if clicking outside
+window.addEventListener('click', function(event) {
+    // Check if the clicked element is not a dropdown button
+  dropdownButtons.forEach(button => {
+    const dropdownContent = button.nextElementSibling;
+    if (!event.target.matches('.action-button') && dropdownContent.classList.contains('show')) {
+        dropdownContent.classList.remove('show'); // Close the dropdown
+      }
+    });
+});
+
+</script>
